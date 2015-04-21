@@ -11,7 +11,11 @@ class Deck
 		void buildDeck(int Suits, int Values);
 
 		Card draw();
+		std::vector<Card> draw(int n);
 		void shuffle();
+
+		bool hasCards();
+		int cardsLeft();
 
 	private:
 		int _index;

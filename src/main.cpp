@@ -22,7 +22,15 @@ int main(void)
 	Deck d;
 	d.shuffle();
 
-	std::cout << cp.print(d.draw()) << std::endl;
+	std::string input;
+
+	while( input != "quit"){
+		std::cout << "> ";
+		getline(std::cin, input);
+		if(input == "d"){
+			std::cout << cp.print(d.draw()) << std::endl;
+		}
+	}
 
 	return 0;
 }

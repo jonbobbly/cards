@@ -34,3 +34,24 @@ Card Deck::draw()
 	if(_index > _cards.size()) _index = 0;
 	return _cards[_index++];
 }
+
+std::vector<Card> Deck::draw(int n)
+{
+	std::vector<Card> hand;
+	for(int i; i < n; i++){
+		if(hasCards()){
+			hand.push_back(draw());
+		}
+	}
+	return hand;
+}
+
+bool Deck::hasCards()
+{
+	return _index < _cards.size();
+}
+
+int Deck::cardsLeft()
+{
+	return _cards.size() - _index;
+}
