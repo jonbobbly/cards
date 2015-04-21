@@ -1,7 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <vector>
+#include <deque>
 #include <string>
 
 class Card
@@ -9,6 +9,8 @@ class Card
 	public:
 		int v; //value
 		int s; //suit
+
+		bool isValid();
 };
 
 class CardPrinter
@@ -19,8 +21,8 @@ class CardPrinter
 		void loadFromString(std::string suits, std::string values);
 
 	private:
-		std::vector<std::string> _values;
-		std::vector<std::string> _suits;
+		std::deque<std::string> _values;
+		std::deque<std::string> _suits;
 };
 
 #endif

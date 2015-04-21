@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <vector>
+#include <deque>
 #include <string>
 #include "deck.h"
 
@@ -31,13 +31,19 @@ void Deck::shuffle()
 
 Card Deck::draw()
 {
-	if(_index > _cards.size()) _index = 0;
-	return _cards[_index++];
+	if(hasCards()){
+		Card c = _cards[0];
+		_cards.pop_front();
+		return c;
+	}
+	Card c;
+	c.v = -1;
+	return c;
 }
 
-std::vector<Card> Deck::draw(int n)
+std::deque<Card> Deck::draw(int n)
 {
-	std::vector<Card> hand;
+	std::deque<Card> hand;
 	for(int i; i < n; i++){
 		if(hasCards()){
 			hand.push_back(draw());
@@ -48,7 +54,7 @@ std::vector<Card> Deck::draw(int n)
 
 bool Deck::hasCards()
 {
-	return _index < _cards.size();
+	return _cards.size() > 0;
 }
 
 int Deck::cardsLeft()

@@ -1,12 +1,20 @@
-#include <vector>
+#include <deque>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include "card.h"
 
+bool Card::isValid(){
+	return v != -1;
+}
+
 std::string CardPrinter::print(Card c)
 {
-	return _values[c.v - 1] + _suits[c.s - 1];
+	if(c.isValid()){
+		return _values[c.v - 1] + _suits[c.s - 1];
+	} else {
+		return "Invalid card!";
+	}
 }
 
 void CardPrinter::loadFromFile(std::string file)
@@ -37,6 +45,9 @@ void CardPrinter::loadFromString(std::string suits, std::string values)
 	std::stringstream ss;
 	std::string str;
 	ss << suits;
+
+	_suits.clear();
+	_values.clear();
 
 	while( !ss.eof() ){
 		getline(ss, str, ',');

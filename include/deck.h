@@ -1,7 +1,7 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include <vector>
+#include <deque>
 #include "card.h"
 
 class Deck
@@ -11,7 +11,7 @@ class Deck
 		void buildDeck(int Suits, int Values);
 
 		Card draw();
-		std::vector<Card> draw(int n);
+		std::deque<Card> draw(int n);
 		void shuffle();
 
 		bool hasCards();
@@ -19,7 +19,7 @@ class Deck
 
 	private:
 		int _index;
-		std::vector<Card> _cards;
+		std::deque<Card> _cards;
 
 };
 
