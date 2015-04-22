@@ -19,6 +19,12 @@ std::deque<std::string> split(const std::string &s){
 	return tokens;
 }
 
+void printDeck(Deck d, CardPrinter cp) {
+	for(int i = 1; i <= d.cardsLeft(); i++){
+		std::cout << i << ": " << cp.print(d.peek(i)) << std::endl;
+	}
+}
+
 int main(void)
 {
 	std::srand( std::time(0) );
@@ -56,9 +62,9 @@ int main(void)
 			cp.loadFromString(std_suits, std_values);
 		} else if (cmd[0] == "show" && cmd.size() > 1){
 			if(cmd[1] == "hand"){
-				std::cout << "This should print your hand..." << std::endl;
+				printDeck(hand, cp);
 			} else if (cmd[1] == "deck"){
-				std::cout << "This should print the deck..." << std::endl;
+				printDeck(d, cp);
 			}
 		}
 	}
