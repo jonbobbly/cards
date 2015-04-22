@@ -9,9 +9,13 @@ class Deck
 	public:
 		Deck();
 		void buildDeck(int Suits, int Values);
+		void clearDeck();
 
 		Card draw();
+		Card peek(int n);
 		std::deque<Card> draw(int n);
+		void add(Card c);
+
 		void shuffle();
 
 		bool hasCards();

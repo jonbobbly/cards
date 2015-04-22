@@ -24,6 +24,11 @@ void Deck::buildDeck(int Suits, int Values)
 	}
 }
 
+void Deck::clearDeck()
+{
+	_cards.clear();
+}
+
 void Deck::shuffle()
 {
 	std::random_shuffle(_cards.begin(), _cards.end());
@@ -41,6 +46,16 @@ Card Deck::draw()
 	return c;
 }
 
+Card Deck::peek(int n)
+{
+	if(n <= cardsLeft()){
+		return _cards[n - 1];
+	}
+	Card c;
+	c.v = -1;
+	return c;
+}
+
 std::deque<Card> Deck::draw(int n)
 {
 	std::deque<Card> hand;
@@ -52,6 +67,11 @@ std::deque<Card> Deck::draw(int n)
 	return hand;
 }
 
+void Deck::add(Card c)
+{
+	_cards.push_front(c);
+}
+
 bool Deck::hasCards()
 {
 	return _cards.size() > 0;
@@ -59,5 +79,5 @@ bool Deck::hasCards()
 
 int Deck::cardsLeft()
 {
-	return _cards.size() - _index;
+	return _cards.size();
 }

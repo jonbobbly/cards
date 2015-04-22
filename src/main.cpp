@@ -1,16 +1,29 @@
 #include <iostream>
 #include <string> 
+#include <sstream>
 #include <algorithm>
+#include <deque>
 #include <ctime>
 #include <cstdlib>
 
 #include "card.h"
 #include "deck.h"
 
+std::deque<std::string> split(const std::string &s){
+	std::deque<std::string> tokens;
+	std::stringstream ss(s);
+	std::string item;
+	while( getline(ss, item, ' ') ){
+		if( !item.empty() ) tokens.push_back(item);
+	}
+	return tokens;
+}
+
 int main(void)
 {
 	std::srand( std::time(0) );
 	CardPrinter cp;
+
 	std::string std_suits = "S,H,C,D";
 	std::string std_values = "A,2,3,4,5,6,7,8,9,T,J,Q,K";
 
@@ -20,20 +33,33 @@ int main(void)
 	cp.loadFromString(std_suits, std_values);
 
 	Deck d;
+	Deck hand;
 	Card c;
+
 	d.shuffle();
+	hand.clearDeck();
 
 	std::string input;
+	std::deque<std::string> cmd;
 
 	while( input != "quit"){
-		std::cout << "> ";
+		std::cout << hand.cardsLeft() << "> ";
 		getline(std::cin, input);
-		if(input == "d"){
-			std::cout << cp.print(d.draw()) << std::endl;
-		} else if (input == "long"){
+		cmd = split(input);
+		
+		if(cmd[0] == "d" || cmd[0] == "draw"){
+			hand.add(d.draw());
+			std::cout << cp.print(hand.peek(1)) << std::endl;
+		} else if (cmd[0] == "long"){
 			cp.loadFromString(long_suits, long_values);
-		} else if (input == "short"){
+		} else if (cmd[0] == "short"){
 			cp.loadFromString(std_suits, std_values);
+		} else if (cmd[0] == "show" && cmd.size() > 1){
+			if(cmd[1] == "hand"){
+				std::cout << "This should print your hand..." << std::endl;
+			} else if (cmd[1] == "deck"){
+				std::cout << "This should print the deck..." << std::endl;
+			}
 		}
 	}
 
