@@ -8,6 +8,7 @@
 
 #include "card.h"
 #include "deck.h"
+#include "playmat.h"
 
 std::deque<std::string> split(const std::string &s){
 	std::deque<std::string> tokens;
@@ -66,6 +67,8 @@ int main(void)
 			} else if (cmd[1] == "deck"){
 				printDeck(d, cp);
 			}
+		} else if (cmd[0] == "place" && cmd.size() > 3){
+			
 		}
 	}
 
