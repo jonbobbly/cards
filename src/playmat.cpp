@@ -6,10 +6,10 @@ Playmat::Playmat()
 	_decks.push_back(d);
 }
 
-Card Playmat::drawDeck(std::string Name)
+Deck& Playmat::getDeck(std::string Name)
 {
 	int i = findDeck(Name);
-	return _decks[i].draw();
+	return _decks[i];
 }
 
 int Playmat::findDeck(std::string Name)

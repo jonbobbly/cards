@@ -12,7 +12,7 @@ class Playmat {
 		Playmat();
 
 		void addDeck(std::string Name, Deck d);
-		Card drawDeck(std::string Name);
+		Deck& getDeck(std::string Name);
 
 	private:
 		int findDeck(std::string Name);
