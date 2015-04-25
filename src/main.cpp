@@ -38,32 +38,35 @@ int main(void)
 	std::string long_values = "Ace,2,3,4,5,6,7,8,9,Ten,Jack,Queen,King";
 
 	cp.loadFromString(std_suits, std_values);
+	
 	Playmat pm;
 	pm.getDeck("deck").shuffle();
 
 	std::string input;
 	std::deque<std::string> cmd;
+	std::string drawDeck = "deck";
+	std::string placeDeck = "deck";
 
-	while( input != "quit"){
+	while( input != "quit" ){
+		std::cout << drawDeck << "(" << pm.getDeck(drawDeck).cardsLeft() << ")/";
+		std::cout << placeDeck << "(" << pm.getDeck(placeDeck).cardsLeft() << ")/";
 		std::cout << pm.getDeck("hand").cardsLeft() << "> ";
 		getline(std::cin, input);
 		cmd = split(input);
 		
 		if(cmd[0] == "d" || cmd[0] == "draw"){
-			pm.getDeck("hand").add( pm.getDeck("deck").draw() );
+			pm.getDeck("hand").add( pm.getDeck(drawDeck).draw() );
 			std::cout << cp.print( pm.getDeck("hand").peek(1) ) << std::endl;
 		} else if (cmd[0] == "long"){
 			cp.loadFromString(long_suits, long_values);
 		} else if (cmd[0] == "short"){
 			cp.loadFromString(std_suits, std_values);
 		} else if (cmd[0] == "show" && cmd.size() > 1){
-			if(cmd[1] == "hand"){
-				printDeck(pm.getDeck("hand"), cp);
-			} else if (cmd[1] == "deck"){
-				printDeck(pm.getDeck("deck"), cp);
-			}
-		} else if (cmd[0] == "place" && cmd.size() > 3){
-			
+			printDeck(pm.getDeck(cmd[1]), cp);
+		} else if (cmd[0] == "rebuild" && cmd.size() > 1){
+			pm.getDeck(cmd[0]).buildDeck(4, 13);
+		} else if (cmd[0] == "shuffle" && cmd.size() > 1){
+			pm.getDeck(cmd[1]).shuffle();
 		}
 	}
 
