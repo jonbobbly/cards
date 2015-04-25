@@ -3,7 +3,11 @@
 Playmat::Playmat()
 {
 	Deck d;
-	_decks.push_back(d);
+	d.clearDeck();
+	addDeck("hand", d);
+
+	d.buildDeck(4, 13);
+	addDeck("deck", d);
 }
 
 Deck& Playmat::getDeck(std::string Name)
@@ -25,4 +29,17 @@ void Playmat::addDeck(std::string Name, Deck d)
 {
 	_decks.push_back(d);
 	_deck_names.push_back(Name);
+}
+
+void Playmat::renameDeck(std::string Old, std::string New)
+{
+	int i = findDeck(Old);
+	_deck_names[i] = New;
+}
+
+void Playmat::eraseDeck(std::string Name)
+{
+	int i = findDeck(Name) - 1;
+	_decks.erase(_decks.begin()+i);
+	_deck_names.erase(_deck_names.begin()+i);
 }

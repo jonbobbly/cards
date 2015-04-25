@@ -14,6 +14,9 @@ class Playmat {
 		void addDeck(std::string Name, Deck d);
 		Deck& getDeck(std::string Name);
 
+		void renameDeck(std::string Old, std::string New);
+		void eraseDeck(std::string Name);
+
 	private:
 		int findDeck(std::string Name);
 		std::deque<Deck> _decks;
