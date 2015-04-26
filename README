@@ -1,1 +1,4 @@
-I'll eventually have a readme...
+Cards is a command-line tool meant to emulate working with a 
+pack of cards. The program allows a near infinite number of 
+standard poker decks inside a "playmat." Future versions are 
+planned to have multiple playmats.
