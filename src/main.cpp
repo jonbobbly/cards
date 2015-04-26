@@ -40,12 +40,11 @@ int main(void)
 	cp.loadFromString(long_suits, long_values);
 	
 	Playmat pm;
-	pm.getDeck("deck").shuffle();
 
 	std::string input;
 	std::deque<std::string> cmd;
 	std::string drawDeck = "deck";
-	std::string placeDeck = "hand";
+	std::string handDeck = "hand";
 
 	while( input != "quit" ){
 		std::cout << ":";
@@ -56,8 +55,8 @@ int main(void)
 			Card c;
 			c = pm.getDeck(drawDeck).draw();
 			if(c.isValid()){
-				pm.getDeck(placeDeck).add(c);
-				std::cout << cp.print(pm.getDeck(placeDeck).peek(1)) << std::endl;
+				pm.getDeck(handDeck).add(c);
+				std::cout << cp.print(pm.getDeck(handDeck).peek(1)) << std::endl;
 			} else {
 			 	std::cout << "Out of cards in " << drawDeck;
 			}
@@ -66,10 +65,10 @@ int main(void)
 		} else if (cmd[0] == "list"){
 			for(int i = 0; i < pm.numDecks(); i++){
 				if(pm.getDeckName(i) == drawDeck){
-					std::cout << "<";
+					std::cout << "d ";
 				}
-				if(pm.getDeckName(i) == placeDeck){
-					std::cout << ">";
+				if(pm.getDeckName(i) == handDeck){
+					std::cout << "h ";
 				}
 				std::cout << pm.getDeckName(i) << " ";
 				std::cout << pm.getDeck(i).cardsLeft() << std::endl;
@@ -89,14 +88,14 @@ int main(void)
 		} else if (cmd[0] == "put" && cmd.size() > 1){
 			Card c;
 			int card = atoi(cmd[1].c_str());
-			c = pm.getDeck(placeDeck).take(card);
+			c = pm.getDeck(handDeck).take(card);
 			pm.getDeck(drawDeck).add(c);
 		} else if (cmd[0] == "set" && cmd.size() > 2){
 			if(cmd[1] == "draw"){
 				drawDeck = cmd[2];
 			}
-			if(cmd[1] == "put"){
-				placeDeck = cmd[2];
+			if(cmd[1] == "hand"){
+				handDeck = cmd[2];
 			}
 		}
 	}

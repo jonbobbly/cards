@@ -5,7 +5,6 @@
 
 Deck::Deck()
 {
-	buildDeck(4, 13);
 }
 
 void Deck::buildDeck(int Suits, int Values)

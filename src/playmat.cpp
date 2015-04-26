@@ -3,7 +3,6 @@
 Playmat::Playmat()
 {
 	Deck d;
-	d.clearDeck();
 	addDeck("hand", d);
 
 	d.buildDeck(4, 13);
