@@ -41,6 +41,12 @@ void Playmat::addDeck(std::string Name, Deck d)
 	_deck_names.push_back(Name);
 }
 
+void Playmat::addDeck(std::string Name)
+{
+	Deck d;
+	addDeck(Name, d);
+}
+
 void Playmat::renameDeck(std::string Old, std::string New)
 {
 	int i = findDeck(Old);

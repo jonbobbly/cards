@@ -11,6 +11,7 @@ class Playmat {
 	public:
 		Playmat();
 
+		void addDeck(std::string Name);
 		void addDeck(std::string Name, Deck d);
 		Deck& getDeck(std::string Name);
 		Deck& getDeck(int i);

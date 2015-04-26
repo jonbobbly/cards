@@ -15,6 +15,7 @@ class Deck
 		Card peek(int n);
 		std::deque<Card> draw(int n);
 		void add(Card c);
+		Card take(int i);
 
 		void shuffle();
 

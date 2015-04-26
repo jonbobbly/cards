@@ -72,6 +72,13 @@ void Deck::add(Card c)
 	_cards.push_front(c);
 }
 
+Card Deck::take(int i)
+{
+	Card ret = _cards[i - 1];
+	_cards.erase(_cards.begin()+i-1);
+	return ret;
+}
+
 bool Deck::hasCards()
 {
 	return _cards.size() > 0;

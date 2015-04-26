@@ -37,7 +37,7 @@ int main(void)
 	std::string long_suits = " of Spades, of Hearts, of Clubs, of Diamonds";
 	std::string long_values = "Ace,2,3,4,5,6,7,8,9,Ten,Jack,Queen,King";
 
-	cp.loadFromString(std_suits, std_values);
+	cp.loadFromString(long_suits, long_values);
 	
 	Playmat pm;
 	pm.getDeck("deck").shuffle();
@@ -45,7 +45,7 @@ int main(void)
 	std::string input;
 	std::deque<std::string> cmd;
 	std::string drawDeck = "deck";
-	std::string placeDeck = "deck";
+	std::string placeDeck = "hand";
 
 	while( input != "quit" ){
 		std::cout << ":";
@@ -53,8 +53,14 @@ int main(void)
 		cmd = split(input);
 		
 		if(cmd[0] == "d" || cmd[0] == "draw"){
-			pm.getDeck("hand").add( pm.getDeck(drawDeck).draw() );
-			printDeck(pm.getDeck("hand"), cp);
+			Card c;
+			c = pm.getDeck(drawDeck).draw();
+			if(c.isValid()){
+				pm.getDeck(placeDeck).add(c);
+				std::cout << cp.print(pm.getDeck(placeDeck).peek(1)) << std::endl;
+			} else {
+			 	std::cout << "Out of cards in " << drawDeck;
+			}
 		} else if (cmd[0] == "long"){
 			cp.loadFromString(long_suits, long_values);
 		} else if (cmd[0] == "list"){
@@ -76,6 +82,22 @@ int main(void)
 			pm.getDeck(cmd[0]).buildDeck(4, 13);
 		} else if (cmd[0] == "shuffle" && cmd.size() > 1){
 			pm.getDeck(cmd[1]).shuffle();
+		} else if (cmd[0] == "add" && cmd.size() > 1){
+			pm.addDeck(cmd[1]);
+		} else if (cmd[0] == "clear" && cmd.size() > 1){
+			pm.getDeck(cmd[1]).clearDeck();
+		} else if (cmd[0] == "put" && cmd.size() > 1){
+			Card c;
+			int card = atoi(cmd[1].c_str());
+			c = pm.getDeck(placeDeck).take(card);
+			pm.getDeck(drawDeck).add(c);
+		} else if (cmd[0] == "set" && cmd.size() > 2){
+			if(cmd[1] == "draw"){
+				drawDeck = cmd[2];
+			}
+			if(cmd[1] == "put"){
+				placeDeck = cmd[2];
+			}
 		}
 	}
 
