@@ -48,17 +48,26 @@ int main(void)
 	std::string placeDeck = "deck";
 
 	while( input != "quit" ){
-		std::cout << drawDeck << "(" << pm.getDeck(drawDeck).cardsLeft() << ")/";
-		std::cout << placeDeck << "(" << pm.getDeck(placeDeck).cardsLeft() << ")/";
-		std::cout << pm.getDeck("hand").cardsLeft() << "> ";
+		std::cout << ":";
 		getline(std::cin, input);
 		cmd = split(input);
 		
 		if(cmd[0] == "d" || cmd[0] == "draw"){
 			pm.getDeck("hand").add( pm.getDeck(drawDeck).draw() );
-			std::cout << cp.print( pm.getDeck("hand").peek(1) ) << std::endl;
+			printDeck(pm.getDeck("hand"), cp);
 		} else if (cmd[0] == "long"){
 			cp.loadFromString(long_suits, long_values);
+		} else if (cmd[0] == "list"){
+			for(int i = 0; i < pm.numDecks(); i++){
+				if(pm.getDeckName(i) == drawDeck){
+					std::cout << "<";
+				}
+				if(pm.getDeckName(i) == placeDeck){
+					std::cout << ">";
+				}
+				std::cout << pm.getDeckName(i) << " ";
+				std::cout << pm.getDeck(i).cardsLeft() << std::endl;
+			}
 		} else if (cmd[0] == "short"){
 			cp.loadFromString(std_suits, std_values);
 		} else if (cmd[0] == "show" && cmd.size() > 1){

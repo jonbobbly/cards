@@ -13,9 +13,12 @@ class Playmat {
 
 		void addDeck(std::string Name, Deck d);
 		Deck& getDeck(std::string Name);
+		Deck& getDeck(int i);
+		std::string getDeckName(int i);
 
 		void renameDeck(std::string Old, std::string New);
 		void eraseDeck(std::string Name);
+		int numDecks();
 
 	private:
 		int findDeck(std::string Name);

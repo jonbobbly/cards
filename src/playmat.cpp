@@ -16,6 +16,16 @@ Deck& Playmat::getDeck(std::string Name)
 	return _decks[i];
 }
 
+Deck& Playmat::getDeck(int i)
+{
+	return _decks[i];
+}
+
+std::string Playmat::getDeckName(int i)
+{
+	return _deck_names[i];
+}
+
 int Playmat::findDeck(std::string Name)
 {
 	int i;
@@ -42,4 +52,9 @@ void Playmat::eraseDeck(std::string Name)
 	int i = findDeck(Name) - 1;
 	_decks.erase(_decks.begin()+i);
 	_deck_names.erase(_deck_names.begin()+i);
+}
+
+int Playmat::numDecks()
+{
+	return _decks.size();
 }
