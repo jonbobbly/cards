@@ -12,8 +12,8 @@ class Deck
 		void clearDeck();
 
 		Card draw();
-		Card peek(int n);
 		std::deque<Card> draw(int n);
+		Card peek(int n);
 		void add(Card c);
 		Card take(int i);
 
